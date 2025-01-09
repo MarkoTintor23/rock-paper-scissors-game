@@ -6,6 +6,10 @@ const playerChoice = document.querySelector("#player-choice");
 const computerChoice = document.querySelector("#computer-choice");
 const playerScore = document.querySelector("#player-score");
 const computerScore = document.querySelector("#computer-score");
+const winPopup = document.querySelector("#win-popup");
+const container = document.querySelector(".game-container");
+const winnerMessage = document.querySelector("#winner-message");
+const resetBtn = document.querySelector("#reset-button");
 
 let currentPlayerScore = 0;
 let currentComputerScore = 0;
@@ -23,6 +27,13 @@ const resetGame = function () {
   currentComputerScore = 0;
   playerScore.textContent = 0;
   computerScore.textContent = 0;
+  container.classList.remove("hidden");
+  winPopup.classList.add("hidden");
+};
+
+const removeClassHidden = function () {
+  container.classList.add("hidden");
+  winPopup.classList.remove("hidden");
 };
 
 rock.addEventListener("click", function () {
@@ -42,11 +53,11 @@ rock.addEventListener("click", function () {
     resultMessage.textContent = "It's a draw!";
   }
   if (currentPlayerScore === 5) {
-    alert("Player Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Player won with score: ${currentPlayerScore} vs Computer score: ${currentComputerScore}`;
   } else if (currentComputerScore === 5) {
-    alert("Computer Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Computer won with score: ${currentComputerScore} vs Player score: ${currentPlayerScore}`;
   }
 });
 
@@ -67,12 +78,12 @@ paper.addEventListener("click", function () {
     resultMessage.textContent = "It's a draw!";
   }
   if (currentPlayerScore === 5) {
-    alert("Player Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Player won with score: ${currentPlayerScore} vs Computer score: ${currentComputerScore}`;
   } else if (currentComputerScore === 5) {
     computerChoice.textContent = "❔";
-    alert("Computer Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Computer won with score: ${currentComputerScore} vs Player score: ${currentPlayerScore}`;
   }
 });
 scissors.addEventListener("click", function () {
@@ -93,10 +104,12 @@ scissors.addEventListener("click", function () {
   }
 
   if (currentPlayerScore === 5) {
-    alert("Player Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Player won with score: ${currentPlayerScore} vs Computer score: ${currentComputerScore}`;
   } else if (currentComputerScore === 5) {
-    alert("Computer Won!!");
-    resetGame();
+    removeClassHidden();
+    winnerMessage.textContent = `Computer won with score: ${currentComputerScore} vs Player score: ${currentPlayerScore}`;
   }
 });
+
+resetBtn.addEventListener("click", resetGame);
